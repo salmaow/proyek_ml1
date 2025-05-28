@@ -89,13 +89,14 @@ X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 
 ## Modeling
 1. Logistic Regression
--- Model Logistic Regression diinisialisasi dengan random_state=42 dan solver='liblinear' (cocok untuk dataset kecil) dan dilatih menggunakan X_train_resampled dan y_train_resampled.
--- Logistic Regression adalah model linear yang memprediksi probabilitas bahwa suatu instance termasuk ke dalam kelas positif (PCOS) menggunakan fungsi logistik.
+-- Model Logistic Regression adalah model linear classification yang digunakan untuk memprediksi probabilitas kelas (0 = tidak terindikasi PCOS, 1 = terindikasi PCOS)
+-- Model ini diinisialisasi dengan random_state=42 dan solver='liblinear' (cocok untuk dataset kecil) dan dilatih menggunakan X_train_resampled dan y_train_resampled.
 
-2. Random Forest Classifier
--- Model Random Forest diinisialisasi dengan n_estimators=100 dan random_state=42 sebagai baseline dan dilatih menggunakan X_train_resampled dan y_train_resampled.
+3. Random Forest Classifier
+-- Model Random Forest adalah ensemble method berbasu decision tree yang menggabubgkan banyak pohon keputusan untuk meningkatkan akurasi dan mengurangi overfitting.
+-- Model ini diinisialisasi dengan n_estimators=100 dan random_state=42 sebagai baseline dan dilatih menggunakan X_train_resampled dan y_train_resampled.
 
-3. Hyperparameter Tuning (Random Forest):
+5. Hyperparameter Tuning (Random Forest):
 -- Menggunakan GridSearchCV untuk parameter:
 ```
 param_grid_rf = {
@@ -105,7 +106,7 @@ param_grid_rf = {
     'max_features': ['sqrt', 'log2']
 }
 ```
--- Tujuannya untuk meningkatkan performa dan menghindari overfitting.
+-- Tujuannya untuk meningkatkan performa dan menghindari overfitting. Tetapi setelah diterapkan model tetap overfitting, kemungkinan karena dataset sintesis.
 
 ## Evaluation
 ### Metrik Evaluasi:
@@ -125,8 +126,10 @@ param_grid_rf = {
 
 ### Visualisasi:
 1. Logistic Regression
+
 ![Screenshot (1521)](https://github.com/user-attachments/assets/8652249c-548c-44e5-b78f-3c33ac9f875a)
-3. Random Forest
+
+2. Random Forest
 ![Screenshot (1522)](https://github.com/user-attachments/assets/2178e977-29fb-40de-b2e3-5fb1cea3594b)
 ![Screenshot (1523)](https://github.com/user-attachments/assets/e55bc322-5566-4d7f-b614-0f012d2f15da)
 
